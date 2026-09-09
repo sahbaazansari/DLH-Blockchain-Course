@@ -1,1 +1,82 @@
 ERC 20 Solidity COde:
+
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+/*
+ * Install OpenZeppelin:
+ * npm install @openzeppelin/contracts
+ */
+
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import {ERC20Pausable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+
+/**
+ * @title CampusToken
+ * @notice Educational ERC-20 example with:
+ *         - Initial fixed allocation
+ *         - Owner-controlled minting
+ *         - Holder-controlled burning
+ *         - Owner-controlled emergency transfer pause
+ *
+ * @dev Uses OpenZeppelin Contracts v5.x-style Ownable constructor.
+ */
+contract CampusToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
+    /// @notice Maximum number of whole tokens that can ever exist.
+    uint256 public constant MAX_SUPPLY = 1_000_000 * 10 ** 18;
+
+    /**
+     * @param initialOwner Address that receives ownership and the initial supply.
+     *
+     * The initial supply here is 100,000 tokens. The owner may mint further
+     * tokens, up to MAX_SUPPLY.
+     */
+    constructor(address initialOwner)
+        ERC20("Campus Token", "CAMP")
+        Ownable(initialOwner)
+    {
+        _mint(initialOwner, 100_000 * 10 ** decimals());
+    }
+
+    /**
+     * @notice Creates new tokens for `to`.
+     * @dev Restricted to the contract owner and bounded by MAX_SUPPLY.
+     *
+     * @param to Recipient address.
+     * @param amount Amount in smallest token units.
+     */
+    function mint(address to, uint256 amount) external onlyOwner {
+        require(totalSupply() + amount <= MAX_SUPPLY, "Maximum supply exceeded");
+        _mint(to, amount);
+    }
+
+    /**
+     * @notice Pauses token transfers, minting, and burning.
+     * @dev Intended as an emergency-control mechanism.
+     */
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    /**
+     * @notice Restores token transfers, minting, and burning.
+     */
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+
+    /**
+     * @dev Required override so ERC20Pausable can enforce pause checks
+     *      for transfers, mints, and burns in OpenZeppelin v5.
+     */
+    function _update(address from, address to, uint256 value)
+        internal
+        override(ERC20, ERC20Pausable)
+    {
+        super._update(from, to, value);
+    }
+}
+```
