@@ -15,7 +15,7 @@ import {ERC20Pausable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC2
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title CampusToken
+ * @title DigitalLearningHub
  * @notice Educational ERC-20 example with:
  *         - Initial fixed allocation
  *         - Owner-controlled minting
@@ -24,7 +24,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
  *
  * @dev Uses OpenZeppelin Contracts v5.x-style Ownable constructor.
  */
-contract CampusToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
+contract DigitalLearningHub is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
     /// @notice Maximum number of whole tokens that can ever exist.
     uint256 public constant MAX_SUPPLY = 1_000_000 * 10 ** 18;
 
