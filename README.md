@@ -221,4 +221,35 @@ Check CID on IPFS:
 https://ipfs.io/ipfs/YOUR_IMAGE_CID/cyber-warrior-1.png
 ```
 
+# Blockchain Security - Ethernaut
 
+```
+contract.info()
+```
+
+```
+contract.info1()
+```
+
+```
+contract.info2("hello")
+```
+
+```
+contract.infoNum()
+```
+
+```
+contract.address
+```
+
+
+```
+await contract.password()
+```
+- ethernaut0
+```
+await contract.authenticate("ethernaut0")
+```
+
+Submit the instance.
