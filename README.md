@@ -90,7 +90,7 @@ contract DigitalLearningHub is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
 pragma solidity ^0.8.24;
 
 // OpenZeppelin ERC-721 implementation
-import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {ERC721, ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 // Access control: only the contract owner can mint
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
