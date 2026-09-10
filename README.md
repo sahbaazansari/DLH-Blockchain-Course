@@ -215,6 +215,10 @@ So the mint transaction becomes conceptually:
 ```
 mintNFT(    0xYourWalletAddress,    "ipfs://QmYourMetadataCID/1.json");
 ```
+
+Check CID on IPFS:
+```
+https://ipfs.io/ipfs/YOUR_IMAGE_CID/cyber-warrior-1.png
 ```
 
 
