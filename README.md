@@ -185,6 +185,36 @@ contract SimpleNFT is ERC721URIStorage, Ownable {
     }
 }
 ```
---
+
+```
+## Example Metadata
+Suppose you have this image:
+```cmd
+cyber-warrior-1.png
+```
+You could create:
+```cmd
+1.json
+```
+with:
+```json
+{  "name": "Cyber Warrior #1",  "description": "The first CyberArt collectible representing the intersection of cybersecurity and blockchain technology.",  "image": "ipfs://YOUR_IMAGE_CID/cyber-warrior-1.png",  "attributes": [    {      "trait_type": "Class",      "value": "Warrior"    },    {      "trait_type": "Technology",      "value": "Cybersecurity"    },    {      "trait_type": "Rarity",      "value": "Rare"    },    {      "trait_type": "Edition",      "value": "Genesis"    }  ]}
+```
+Then upload both:
+```cmd
+cyber-warrior-1.png
+1.json
+```
+to IPFS.
+
+Your contract receives:
+```
+ipfs://YOUR_METADATA_CID/1.json
+```
+So the mint transaction becomes conceptually:
+```
+mintNFT(    0xYourWalletAddress,    "ipfs://QmYourMetadataCID/1.json");
+```
+```
 
 
