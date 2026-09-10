@@ -80,3 +80,111 @@ contract DigitalLearningHub is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
     }
 }
 ```
+
+
+#ERC721 - NFTs
+
+```sol
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.24;
+
+// OpenZeppelin ERC-721 implementation
+import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
+// Access control: only the contract owner can mint
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SimpleNFT is ERC721URIStorage, Ownable {
+
+    // Counter for generating unique token IDs
+    uint256 private _nextTokenId;
+
+    /**
+     * @dev Constructor
+     *
+     * NFT Collection Name: CyberArt
+     * NFT Symbol: CART
+     *
+     * msg.sender becomes the contract owner.
+     */
+    constructor()
+        ERC721("CyberArt", "CART")
+        Ownable(msg.sender)
+    {
+        _nextTokenId = 1;
+    }
+
+    /**
+     * @dev Mint a new NFT.
+     *
+     * Only the contract owner can call this function.
+     *
+     * @param to Address that will receive the NFT
+     * @param metadataURI URI pointing to the NFT metadata JSON
+     *
+     * Example:
+     * ipfs://QmExampleHash/1.json
+     */
+    function mintNFT(
+        address to,
+        string memory metadataURI
+    )
+        public
+        onlyOwner
+        returns (uint256)
+    {
+        uint256 tokenId = _nextTokenId;
+
+        // Mint the NFT
+        _safeMint(to, tokenId);
+
+        // Connect token ID to its metadata
+        _setTokenURI(tokenId, metadataURI);
+
+        // Increment ID for the next NFT
+        _nextTokenId++;
+
+        return tokenId;
+    }
+
+    /**
+     * @dev Returns the next token ID that will be minted.
+     */
+    function nextTokenId()
+        public
+        view
+        returns (uint256)
+    {
+        return _nextTokenId;
+    }
+
+    /**
+     * @dev Required override because both ERC721
+     * and ERC721URIStorage implement tokenURI().
+     */
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
+    /**
+     * @dev Required override for ERC-165 interface support.
+     */
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+}
+```
+--
+
+
