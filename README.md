@@ -221,7 +221,11 @@ Check CID on IPFS:
 https://ipfs.io/ipfs/YOUR_IMAGE_CID/cyber-warrior-1.png
 ```
 
-# Blockchain Security - Ethernaut
+# Blockchain Security - Ethernaut CTF 
+
+## The first **Hello Ethernaut**
+
+- The idea for this level is to interact with the deployed contract itslef
 
 ```
 contract.info()
